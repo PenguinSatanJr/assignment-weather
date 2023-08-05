@@ -1,0 +1,22 @@
+extends:
+  - airbnb
+  - airbnb/hooks
+  - airbnb-typescript
+  - prettier
+parserOptions:
+  project: ./tsconfig.json
+plugins:
+  - prettier
+  - jest
+rules:
+  prettier/prettier: error
+  react/function-component-definition:
+    - error
+    - namedComponents: 'arrow-function'
+      unnamedComponents: 'arrow-function'
+  react/jsx-props-no-spreading: off
+  react/react-in-jsx-scope: off
+  react/require-default-props: off
+  jest/no-focused-tests: error
+  jest/no-disabled-tests: error
+  prefer-default-export: off
