@@ -6,7 +6,7 @@ const useCurrentWeatherQuery = (
   options?: { enabled: boolean },
 ) =>
   useQuery(
-    ['artists', params.lat, params.lon, params.appid, params.units],
+    ['weather', params.lat, params.lon, params.appid, params.units],
     () => getCurrentWeather(params),
     options,
   );

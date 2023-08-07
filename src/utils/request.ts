@@ -9,9 +9,6 @@ export type RequestParams = {
 const request = async ({ url, body, method }: RequestParams) => {
   const response = await fetch(url, {
     method,
-    headers: {
-      'Content-Type': 'application/json',
-    },
     ...(body && { body: JSON.stringify(body) }),
   });
 

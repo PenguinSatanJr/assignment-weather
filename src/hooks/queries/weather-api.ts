@@ -1,7 +1,7 @@
 import qs from 'qs';
 import get from 'utils/client';
 
-const path = 'https://api.openweathermap.org/data/2.5/forecast';
+const path = 'https://api.openweathermap.org/data/2.5/weather';
 
 export type GetWeatherParams = {
   lat: number;

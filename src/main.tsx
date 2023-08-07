@@ -1,14 +1,21 @@
 import { Grid, Typography } from '@mui/material';
 import LineChart from 'components/line-chart';
 import Table from 'components/table';
+import { GetWeatherParams } from 'hooks/queries/weather-api';
+import useCurrentWeatherQuery from 'hooks/queries/weather-queries';
 import { FormattedMessage } from 'react-intl';
 
 const Main = () => {
-  const someDate = new Date();
+  const params: GetWeatherParams = {
+    lat: 40.1872,
+    lon: 44.5152,
+    appid: '39612356bfcb87e2061a89eb187b5f9c',
+    units: 'metric',
+  };
 
-  console.log(
-    someDate.toLocaleString('en-US', { timeZone: 'America/New_York' }),
-  );
+  const weatherQuery = useCurrentWeatherQuery(params);
+
+  console.log(weatherQuery);
 
   return (
     <>
@@ -24,27 +31,9 @@ const Main = () => {
             <LineChart />
           </Grid>
         </Grid>
-        <Grid item md={6} sm={6}>
+        <Grid item xs={12}>
           <Typography variant="h5" sx={{ paddingBottom: 2 }}>
             Morning
-          </Typography>
-          <Table />
-        </Grid>
-        <Grid item md={6} sm={6}>
-          <Typography variant="h5" sx={{ paddingBottom: 2 }}>
-            Afternoon
-          </Typography>
-          <Table />
-        </Grid>
-        <Grid item md={6} sm={6}>
-          <Typography variant="h5" sx={{ paddingBottom: 2 }}>
-            Evening
-          </Typography>
-          <Table />
-        </Grid>
-        <Grid item md={6} sm={6}>
-          <Typography variant="h5" sx={{ paddingBottom: 2 }}>
-            Night
           </Typography>
           <Table />
         </Grid>
