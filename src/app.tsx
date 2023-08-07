@@ -2,8 +2,8 @@ import React from 'react';
 import { IntlProvider } from 'react-intl';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import retry from 'utils/client';
 import Main from 'main';
+import retry from 'utils/http-error';
 
 const queryClient = new QueryClient({
   defaultOptions: {
