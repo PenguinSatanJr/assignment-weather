@@ -1,4 +1,5 @@
 import qs from 'qs';
+import { WeatherData } from 'types';
 import get from 'utils/client';
 
 const path = 'https://api.openweathermap.org/data/2.5/weather';
@@ -11,4 +12,4 @@ export type GetWeatherParams = {
 };
 
 export const getCurrentWeather = (params: GetWeatherParams) =>
-  get<any>(`${path}?${qs.stringify(params)}`);
+  get<WeatherData>(`${path}?${qs.stringify(params)}`);

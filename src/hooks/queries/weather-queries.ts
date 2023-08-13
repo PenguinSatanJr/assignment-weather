@@ -3,7 +3,7 @@ import { GetWeatherParams, getCurrentWeather } from './weather-api';
 
 const useCurrentWeatherQuery = (
   params: GetWeatherParams,
-  options?: { enabled: boolean },
+  options?: { enabled: boolean; staleTime: number },
 ) =>
   useQuery(
     ['weather', params.lat, params.lon, params.appid, params.units],

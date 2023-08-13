@@ -24,7 +24,7 @@ const LineChart = () => {
   const weatherData = [30, 35, 36, 38, 39, 40, 41];
   return (
     <MuiLineChart
-      width={window.screen.width - 100}
+      width={500}
       height={300}
       series={[{ data: weatherData }]}
       xAxis={[{ scaleType: 'point', data: xLabels }]}

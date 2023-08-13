@@ -6,91 +6,66 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { FormattedMessage } from 'react-intl';
-import data from './data';
+import weatherDataApiFilter from 'api/response-schemas';
+import { WeatherData } from 'types';
 
-type WeatherData = {
-  main: {
-    temp: number;
-    pressure: number;
-  };
-  weather: {
-    description: string;
-  }[];
-  wind: {
-    speed: number;
-  };
-  dt_txt: string;
+type TableProps = {
+  data: WeatherData[];
 };
 
-const createData = (weatherData: WeatherData) => {
-  const date = new Date(weatherData.dt_txt);
+const Table = ({ data }: TableProps) => {
+  const rows = data.map((item) => weatherDataApiFilter(item));
 
-  return {
-    date: date.toLocaleString('en-US'),
-    temperature: weatherData.main.temp,
-    pressure: weatherData.main.pressure,
-    description: weatherData.weather[0].description,
-    windSpeed: weatherData.wind.speed,
-  };
-};
-
-const rows = [
-  createData(data.list[0]),
-  createData(data.list[1]),
-  createData(data.list[2]),
-  createData(data.list[3]),
-  createData(data.list[4]),
-];
-
-const Table = () => (
-  <TableContainer component={Paper}>
-    <MuiTable size="small">
-      <TableHead>
-        <TableRow>
-          <TableCell>
-            <FormattedMessage id="table.time" defaultMessage="Date" />
-          </TableCell>
-          <TableCell align="right">
-            <FormattedMessage
-              id="table.temperature"
-              defaultMessage="Temperature"
-            />
-          </TableCell>
-          <TableCell align="right">
-            <FormattedMessage id="table.pressure" defaultMessage="Pressure" />
-          </TableCell>
-          <TableCell align="right">
-            <FormattedMessage
-              id="table.description"
-              defaultMessage="Description"
-            />
-          </TableCell>
-          <TableCell align="right">
-            <FormattedMessage
-              id="table.windSpeed"
-              defaultMessage="Wind speed"
-            />
-          </TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <TableRow
-            key={row.date}
-            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-          >
-            <TableCell component="th" scope="row">
-              {row.date}
+  return (
+    <TableContainer component={Paper}>
+      <MuiTable size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>
+              <FormattedMessage id="table.time" defaultMessage="Date" />
             </TableCell>
-            <TableCell align="right">{row.temperature}</TableCell>
-            <TableCell align="right">{row.pressure}</TableCell>
-            <TableCell align="right">{row.description}</TableCell>
-            <TableCell align="right">{row.windSpeed}</TableCell>
+            <TableCell align="right">
+              <FormattedMessage
+                id="table.temperature"
+                defaultMessage="Temperature"
+              />
+            </TableCell>
+            <TableCell align="right">
+              <FormattedMessage id="table.pressure" defaultMessage="Pressure" />
+            </TableCell>
+            <TableCell align="right">
+              <FormattedMessage
+                id="table.description"
+                defaultMessage="Description"
+              />
+            </TableCell>
+            <TableCell align="right">
+              <FormattedMessage
+                id="table.windSpeed"
+                defaultMessage="Wind speed"
+              />
+            </TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-    </MuiTable>
-  </TableContainer>
-);
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            <TableRow
+              key={row.date}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {new Date(row.date * 1000).toLocaleString('en-US')}
+              </TableCell>
+              <TableCell align="right">{row.temperature}</TableCell>
+              <TableCell align="right">{row.pressure}</TableCell>
+              <TableCell align="right">{row.description}</TableCell>
+              <TableCell align="right">{row.windSpeed}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </MuiTable>
+    </TableContainer>
+  );
+};
 
 export default Table;
