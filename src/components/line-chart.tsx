@@ -1,33 +1,24 @@
 import { LineChart as MuiLineChart } from '@mui/x-charts/LineChart';
+import { WeatherData } from 'types';
 
-const getWeekDays = () => {
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-  const today = new Date().getDay();
-  const weekDays = [];
-
-  for (let i = 0; i < 5; i += 1) {
-    weekDays.push(days[Math.abs(today + i)]);
-  }
-  return weekDays;
+type LineChartProps = {
+  data: WeatherData[];
 };
 
-const LineChart = () => {
-  const xLabels = getWeekDays();
-  const weatherData = [30, 35, 36, 38, 39, 40, 41];
+const LineChart = ({ data }: LineChartProps) => {
+  const getDates = () =>
+    data.map((item) => new Date(item.dt * 1000).toLocaleString('en-US'));
+
+  const getTemperatures = () => data.map((item) => item.main.temp);
+
+  const date = getDates();
+  const temperature = getTemperatures();
   return (
     <MuiLineChart
       width={500}
       height={300}
-      series={[{ data: weatherData }]}
-      xAxis={[{ scaleType: 'point', data: xLabels }]}
+      series={[{ data: temperature }]}
+      xAxis={[{ scaleType: 'point', data: date }]}
     />
   );
 };

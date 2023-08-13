@@ -47,7 +47,7 @@ const Main = () => {
       </Typography>
       <Grid container justifyContent="center" spacing={5} paddingX={5}>
         <Grid item>
-          <LineChart />
+          <LineChart data={weatherData} />
         </Grid>
 
         <Grid item xs={12}>
@@ -58,6 +58,7 @@ const Main = () => {
             variant="contained"
             onClick={handleFetchData}
             disabled={!weatherData.length}
+            loading={weatherQuery.isLoading}
           >
             <FormattedMessage
               id="main.fetchButtonTitle"
