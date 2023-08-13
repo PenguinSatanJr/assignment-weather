@@ -1,4 +1,5 @@
 import { LineChart as MuiLineChart } from '@mui/x-charts/LineChart';
+import weatherDataApiFilter from 'api/response-schemas';
 import { WeatherData } from 'types';
 
 type LineChartProps = {
@@ -7,18 +8,18 @@ type LineChartProps = {
 
 const LineChart = ({ data }: LineChartProps) => {
   const getDates = () =>
-    data.map((item) => new Date(item.dt * 1000).toLocaleString('en-US'));
+    data.map((item) =>
+      new Date(weatherDataApiFilter(item).date * 1000).toLocaleString('en-US'),
+    );
 
   const getTemperatures = () => data.map((item) => item.main.temp);
 
-  const date = getDates();
-  const temperature = getTemperatures();
   return (
     <MuiLineChart
       width={500}
       height={300}
-      series={[{ data: temperature }]}
-      xAxis={[{ scaleType: 'point', data: date }]}
+      series={[{ data: getTemperatures() }]}
+      xAxis={[{ scaleType: 'point', data: getDates() }]}
     />
   );
 };

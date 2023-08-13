@@ -34,21 +34,20 @@ const Main = () => {
         ? console.log('Sorry there is no new data yet')
         : setWeatherData([...weatherData, weatherQuery.data]);
     }
-    return console.log('Loading');
+    return null;
   };
 
   return (
     <>
       <Typography variant="h2" align="center">
-        <FormattedMessage
-          id="main.title"
-          defaultMessage="Weather forecast in Yerevan"
-        />
+        <FormattedMessage id="main.title" defaultMessage="Weather in Yerevan" />
       </Typography>
       <Grid container justifyContent="center" spacing={5} paddingX={5}>
-        <Grid item>
-          <LineChart data={weatherData} />
-        </Grid>
+        {weatherData.length && (
+          <Grid item>
+            <LineChart data={weatherData} />
+          </Grid>
+        )}
 
         <Grid item xs={12}>
           <Table data={weatherData} />
