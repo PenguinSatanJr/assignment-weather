@@ -11,9 +11,11 @@ import { WeatherData } from 'types';
 const params: GetWeatherParams = {
   lat: 40.1872,
   lon: 44.5152,
-  appid: '39612356bfcb87e2061a89eb187b5f9c',
+  appid: process.env.REACT_APP_API_KEY,
   units: 'metric',
 };
+
+console.log(process.env.REACT_APP_API_KEY);
 
 const Main = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);

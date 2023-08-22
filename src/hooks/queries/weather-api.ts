@@ -7,7 +7,7 @@ const path = 'https://api.openweathermap.org/data/2.5/weather';
 export type GetWeatherParams = {
   lat: number;
   lon: number;
-  appid: string;
+  appid?: string;
   units?: string;
 };
 
